@@ -1,3 +1,9 @@
+---
+import "../styles/global.css";
+import background from '../assets/background.svg';
+import { ClientRouter } from "astro:transitions";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,9 +12,16 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+        <ClientRouter />
 	</head>
 	<body>
-		<slot />
+        <div class="bg-cover blur-xl absolute w-full h-full"
+            style=`background-image: url(${background.src});`
+            >
+        </div>
+        <div class="text-white flex items-center justify-center font-chakra w-[100vw] h-[100vh]">
+            <slot />
+        </div>
 	</body>
 </html>
 
@@ -17,6 +30,6 @@
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
-	}
+        height: 100%;
+    }
 </style>

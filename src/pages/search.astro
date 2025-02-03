@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import View from '../components/View.astro';
+import { SearchView } from '../components/SearchView.tsx';
+---
+
+<Layout>
+    <View>
+        <SearchView client:only="react" />
+    </View>
+</Layout>
