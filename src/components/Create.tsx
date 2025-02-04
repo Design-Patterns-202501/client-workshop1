@@ -31,17 +31,26 @@ export const Create = () => {
 
         console.log(booking);
 
-        const res = await fetch(`${apiUrl}/booking/create`, {
-            method: 'POST',
-            body: JSON.stringify(booking),
-            headers: {
-                'Content-Type': 'application/json'
+
+        try {
+            const res = await fetch(`${apiUrl}/booking/create`, {
+                method: 'POST',
+                body: JSON.stringify(booking),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Origin': 'http://localhost:4321'
+                }
+            });
+
+            if (res.ok) {
+                toast.info("Cita agendada");
+            } else {
+                toast.error("No se pudo agendar la cita.")
             }
-        });
-
-        const resJson = await res.json();
-
-        console.log(resJson)
+        } catch (e) {
+            console.log(e)
+        }
+        
     }
 
     return (
@@ -111,13 +120,17 @@ export const Create = () => {
                             onChange={e => setTime(e.target.valueAsDate)}
                         />
                     </div>
-                    <button 
-                        className="px-8 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200" 
-                        id="book"
-                        onClick={createBooking}
-                    >
+                    
+                    <div className="flex gap-10 justify-center items-center">
+                        <button 
+                            className="px-8 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200" 
+                            id="book"
+                            onClick={createBooking}
+                        >
                         Reserva
-                    </button>
+                        </button>
+                        <FancyButton href={"/"} text={"Volver"} onClick={() => {}}/>
+                    </div>
                 </div>
             </div>
 

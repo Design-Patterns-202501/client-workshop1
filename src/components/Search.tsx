@@ -5,17 +5,7 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
 import type { Booking } from "@/types/Booking";
 import { cleanDate } from "@/utils/utils";
-
-const nodes: Booking[] = [
-  {
-    id: "0",
-    clientName: "Shopping List",
-    clientAge: 3,
-    date: "TASK",
-    hour: 2,
-    minute: 3,
-  },
-];
+import { useState } from "react";
 
 const COLUMNS = [
   {
@@ -44,14 +34,27 @@ const COLUMNS = [
 ];
 
 export const Search =  () => {
+
+  const [nodes, setNodes] = useState<Booking[]>([]);
+
   const data = { nodes };
 
   const mantineTheme = getTheme();
   const theme = useTheme(mantineTheme);
 
-  const getBookings = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const getBookings = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
+    const apiUrl = import.meta.env.PUBLIC_API_URL;
     const dateString = cleanDate(e.target.valueAsDate!);
+    try {
+      const res = await fetch(`${apiUrl}/bookings?date=${dateString}`, {
+      });
+      const resJson = await res.json();
+
+      setNodes(resJson.data);
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   return (
