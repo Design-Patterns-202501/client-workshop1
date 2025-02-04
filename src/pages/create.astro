@@ -1,0 +1,11 @@
+---
+import { Create } from "@/components/Create";
+import Layout from "@/layouts/Layout.astro";
+import View from "@/components/View.astro";
+---
+
+<Layout>
+    <View>
+        <Create client:only="react" />
+    </View>
+</Layout>
