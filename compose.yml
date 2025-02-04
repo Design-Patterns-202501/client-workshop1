@@ -1,0 +1,9 @@
+services:
+  client:
+    build: ./client-workshop1-main
+    ports:
+      - 4321:4321
+  api:
+    build: ./API-Workshop1-main
+    ports:
+      - 3000:3000
