@@ -3,15 +3,8 @@ import FancyButton from "./FancyButton";
 
 import { useTheme } from '@table-library/react-table-library/theme';
 import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/mantine';
-
-type Booking = {
-  id: string;
-  clientName: string;
-  clientAge: number;
-  date: string;
-  hour: number;
-  minute: number;
-};
+import type { Booking } from "@/types/Booking";
+import { cleanDate } from "@/utils/utils";
 
 const nodes: Booking[] = [
   {
@@ -30,14 +23,12 @@ const COLUMNS = [
     renderCell: (item: Booking) => {
       return item.id;
     },
-    style: "dsa"
   },
   {
     label: "Nombres",
     renderCell: (item: Booking) => {
       return item.clientName;
     },
-    style: "dsa"
   },
   {
     label: "Hora",
@@ -49,7 +40,6 @@ const COLUMNS = [
 
       return date.toLocaleTimeString();
     },
-    style: "dsa"
   },
 ];
 
@@ -60,18 +50,8 @@ export const Search =  () => {
   const theme = useTheme(mantineTheme);
 
   const getBookings = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const dateParts = e.target.valueAsDate
-      ?.toLocaleDateString("en-US")!
-      .split("/")!;
-    const year = dateParts[2];
-    let month = dateParts[1].trim();
-    if (month.length == 1) month = "0" + month;
-    let day = dateParts[0].trim();
-    if (day.length == 1) day = "0" + day;
 
-    const dateString = year + "/" + month + "/" + day;
-
-    console.log(dateString);
+    const dateString = cleanDate(e.target.valueAsDate!);
   };
 
   return (
@@ -92,7 +72,7 @@ export const Search =  () => {
       </div>
 
       <div className="flex justify-center items-center">
-        <FancyButton href={"/"} text={"Volver"} />
+        <FancyButton href={"/"} text={"Volver"} onClick={() => {}}/>
       </div>
 
     </div>

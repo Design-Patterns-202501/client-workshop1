@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
+import "react-toastify/dist/ReactToastify.css";
 import background from '../assets/background.svg';
 import { ClientRouter } from "astro:transitions";
+import { ToastContainer } from "react-toastify";
 ---
 
 <!doctype html>
@@ -15,6 +17,7 @@ import { ClientRouter } from "astro:transitions";
         <ClientRouter />
 	</head>
 	<body>
+		<ToastContainer client:load />
         <div class="bg-cover blur-xl absolute w-full h-full"
             style=`background-image: url(${background.src});`
             >
