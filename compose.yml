@@ -7,3 +7,6 @@ services:
     build: ./API-Workshop1
     ports:
       - 3000:3000
+    env_file:
+        - ./API-Workshop1/.env
+
